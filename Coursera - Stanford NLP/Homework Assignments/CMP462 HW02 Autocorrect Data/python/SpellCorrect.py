@@ -5,14 +5,17 @@ from HolbrookCorpus import HolbrookCorpus
 from UniformLanguageModel import UniformLanguageModel
 from UnigramLanguageModel import UnigramLanguageModel
 from StupidBackoffLanguageModel import StupidBackoffLanguageModel
+from TrigramStupidBackoffLanguageModel import TrigramStupidBackoffLanguageModel
 from LaplaceUnigramLanguageModel import LaplaceUnigramLanguageModel
 from LaplaceBigramLanguageModel import LaplaceBigramLanguageModel
+from LaplaceTrigramLanguageModel import LaplaceTrigramLanguageModel
 from CustomLanguageModel import CustomLanguageModel
 from EditModel import EditModel
 from SpellingResult import SpellingResult
 import types
 
 # Modified version of Peter Norvig's spelling corrector
+
 """Spelling Corrector.
 
 Copyright 2007 Peter Norvig. 
@@ -112,6 +115,12 @@ def main():
     uniformOutcome = uniformSpell.evaluate(devCorpus)
     print str(uniformOutcome)
 
+    print 'Unigram Language Model: '
+    unigramLM = UnigramLanguageModel(trainingCorpus)
+    unigramSpell = SpellCorrect(unigramLM, trainingCorpus)
+    unigramOutcome = unigramSpell.evaluate(devCorpus)
+    print str(unigramOutcome)
+
     print 'Laplace Unigram Language Model: '
     laplaceUnigramLM = LaplaceUnigramLanguageModel(trainingCorpus)
     laplaceUnigramSpell = SpellCorrect(laplaceUnigramLM, trainingCorpus)
@@ -123,6 +132,12 @@ def main():
     laplaceBigramSpell = SpellCorrect(laplaceBigramLM, trainingCorpus)
     laplaceBigramOutcome = laplaceBigramSpell.evaluate(devCorpus)
     print str(laplaceBigramOutcome)
+
+    print 'Trigram Stupid Backoff Language Model: '
+    trisbLM = TrigramStupidBackoffLanguageModel(trainingCorpus)
+    trisbSpell = SpellCorrect(trisbLM, trainingCorpus)
+    trisbOutcome = trisbSpell.evaluate(devCorpus)
+    print str(trisbOutcome)
 
     print 'Stupid Backoff Language Model: '
     sbLM = StupidBackoffLanguageModel(trainingCorpus)
