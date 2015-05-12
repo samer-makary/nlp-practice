@@ -8,7 +8,6 @@ from StupidBackoffLanguageModel import StupidBackoffLanguageModel
 from TrigramStupidBackoffLanguageModel import TrigramStupidBackoffLanguageModel
 from LaplaceUnigramLanguageModel import LaplaceUnigramLanguageModel
 from LaplaceBigramLanguageModel import LaplaceBigramLanguageModel
-from LaplaceTrigramLanguageModel import LaplaceTrigramLanguageModel
 from CustomLanguageModel import CustomLanguageModel
 from EditModel import EditModel
 from SpellingResult import SpellingResult
@@ -109,17 +108,17 @@ def main():
     devPath = '../data/holbrook-tagged-dev.dat'
     devCorpus = HolbrookCorpus(devPath)
 
-    print 'Uniform Language Model: '
-    uniformLM = UniformLanguageModel(trainingCorpus)
-    uniformSpell = SpellCorrect(uniformLM, trainingCorpus)
-    uniformOutcome = uniformSpell.evaluate(devCorpus)
-    print str(uniformOutcome)
-
     print 'Unigram Language Model: '
     unigramLM = UnigramLanguageModel(trainingCorpus)
     unigramSpell = SpellCorrect(unigramLM, trainingCorpus)
     unigramOutcome = unigramSpell.evaluate(devCorpus)
     print str(unigramOutcome)
+
+    print 'Uniform Language Model: '
+    uniformLM = UniformLanguageModel(trainingCorpus)
+    uniformSpell = SpellCorrect(uniformLM, trainingCorpus)
+    uniformOutcome = uniformSpell.evaluate(devCorpus)
+    print str(uniformOutcome)
 
     print 'Laplace Unigram Language Model: '
     laplaceUnigramLM = LaplaceUnigramLanguageModel(trainingCorpus)
